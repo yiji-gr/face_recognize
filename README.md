@@ -7,4 +7,4 @@ make -j
 ./face_recognize  
 
 
-有个问题是，当改变mtcnn的minsize时，同一张人脸变化差异比较大，具体原因还在探索。
+有个问题是，当改变mtcnn的minsize时，同一张人脸相似度差异比较大，具体原因还在探索。

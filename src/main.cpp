@@ -47,12 +47,7 @@ Mat mt(Mat frame)
     point.push_back(Point2f(finalBbox[0].landmark[2], finalBbox[0].landmark[3]));
 
     affined_area = getwarpAffineImg(frame, point);
-    face_area = affined_area(bbox[0]).clone();
-    
-    //https://github.com/Tencent/ncnn/wiki/FAQ-ncnn-produce-wrong-result
-    //Mat::from_pixels/from_pixels_resize assume that the pixel data is continous
-    //You shall pass continous pixel buffer to from_pixels family.
-    //If your image is an opencv submat from an image roi, call clone() to get a continous one.
+    face_area = affined_area(bbox[0]);
 
     return face_area;
 }

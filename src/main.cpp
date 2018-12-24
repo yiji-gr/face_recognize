@@ -43,6 +43,11 @@ Mat mt(Mat frame)
 
     affined_area = getwarpAffineImg(frame, point);
     face_area = affined_area(bbox[0]).clone();
+    
+    //https://github.com/Tencent/ncnn/wiki/FAQ-ncnn-produce-wrong-result
+    //Mat::from_pixels/from_pixels_resize assume that the pixel data is continous
+    //You shall pass continous pixel buffer to from_pixels family.
+    //If your image is an opencv submat from an image roi, call clone() to get a continous one.
 
     return face_area;
 }
@@ -57,8 +62,8 @@ vector<float> extract_feature(Mat img)
 
 int main()
 {
-    Mat img1 = imread("../gao1.jpg");
-    Mat img2 = imread("../gao3.jpg");
+    Mat img1 = imread("../gao2.jpg");
+    Mat img2 = imread("../gao4.jpg");
 
     Mat face1 = mt(img1);
     Mat face2 = mt(img2);

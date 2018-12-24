@@ -28,7 +28,12 @@ Mat mt(Mat frame)
     Mat face_area, affined_area;
 
     ncnn::Mat ncnn_img = ncnn::Mat::from_pixels(frame.data, ncnn::Mat::PIXEL_BGR2RGB, frame.cols, frame.rows);
+    
+    clock_t start, finish;
+    start = clock();
     vector<FaceInfo> finalBbox = mtcnn.Detect(ncnn_img);
+    finish = clock();
+    cout << "mtcnn cost " << (float)(finish - start) / CLOCKS_PER_SEC * 1000 << " ms" << endl;
 
     const int num_box = finalBbox.size();
     vector<Rect> bbox;
